@@ -10,19 +10,22 @@ import SwiftUI
 
 struct ContentView: View {
 	@State private var checkAmount = ""
-	@State private var numberOfPeople = 2
+	@State private var numberOfPeople = "4"
 	@State private var tipPercentage = 2
 
 	let tipPercentages = [10, 15, 20, 25, 0]
 
-	var totalPerPerson: Double {
-		let peopleCount = Double(numberOfPeople + 2)
+	var totalAmount: Double {
 		let tipSelection = Double(tipPercentages[tipPercentage])
 		let orderAmount = Double(checkAmount) ?? 0
 
 		let tipValue = orderAmount / 100 * tipSelection
-		let grandTotal = orderAmount + tipValue
-		let amountPerPerson = grandTotal / peopleCount
+		return orderAmount + tipValue
+	}
+
+	var totalPerPerson: Double {
+		let peopleCount = Double(numberOfPeople) ?? 0
+		let amountPerPerson = totalAmount / peopleCount
 
 		return amountPerPerson
 	}
@@ -31,14 +34,19 @@ struct ContentView: View {
 		NavigationView{
 			Form {
 				Section {
-					TextField("Amount", text: $checkAmount)
+					HStack{
+						Text("€")
+						TextField("Amount", text: $checkAmount)
 						.keyboardType(.decimalPad)
-
-					Picker("Number of people", selection: $numberOfPeople) {
-						ForEach(2 ..< 100) {
-							Text("\($0) people")
-						}
 					}
+					HStack{
+						Text("Number of people:")
+						TextField("0", text: $numberOfPeople)
+							.keyboardType(.numberPad)
+							.multilineTextAlignment(.trailing)
+					}
+
+
 				}
 				Section(header: Text("How much tip do you want to leave?")){
 					Picker("Tip percentage", selection: $tipPercentage){
@@ -47,7 +55,10 @@ struct ContentView: View {
 						}
 					} .pickerStyle(SegmentedPickerStyle())
 				}
-				Section {
+				Section(header: Text("Total amount including tip")){
+					Text("€\(totalAmount, specifier: "%.2f")")
+				}
+				Section(header: Text("Amount per person")) {
 					Text("€\(totalPerPerson, specifier: "%.2f")")
 
 				}
@@ -55,6 +66,7 @@ struct ContentView: View {
 		.navigationBarTitle("WeSplit")
 		}
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
