@@ -40,11 +40,7 @@ struct ContentView: View {
 					}) {
 						Image(self.countries[number])
 							.renderingMode(.original)
-							.clipShape(Capsule())
-							.overlay(Capsule()
-								.stroke(Color.black,
-										lineWidth: 1))
-							.shadow(color:.black, radius: 2)
+							.flagImageStyle()
 					}
 				}
 				VStack{
@@ -79,6 +75,23 @@ struct ContentView: View {
 	func askQuestion(){
 		countries.shuffle()
 		correctAnswer = Int.random(in: 0...2 )
+	}
+}
+
+struct FlagImage: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.clipShape(Capsule())
+			.overlay(Capsule()
+				.stroke(Color.black,
+						lineWidth: 1))
+			.shadow(color:.black, radius: 2)
+	}
+}
+
+extension View {
+	func flagImageStyle() -> some View {
+		self.modifier(FlagImage())
 	}
 }
 
