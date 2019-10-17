@@ -38,9 +38,7 @@ struct ContentView: View {
 					Button(action: {
 						self.flagTapped(number)
 					}) {
-						Image(self.countries[number])
-							.renderingMode(.original)
-							.flagImageStyle()
+						FlagImage(image: self.countries[number])
 					}
 				}
 				VStack{
@@ -78,25 +76,26 @@ struct ContentView: View {
 	}
 }
 
-struct FlagImage: ViewModifier {
-	func body(content: Content) -> some View {
-		content
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+struct FlagImage: View {
+	var image: String
+
+	init(image: String) {
+		self.image = image
+	}
+
+	var body: some View {
+		Image(image)
+			.renderingMode(.original)
 			.clipShape(Capsule())
 			.overlay(Capsule()
 				.stroke(Color.black,
 						lineWidth: 1))
 			.shadow(color:.black, radius: 2)
 	}
-}
-
-extension View {
-	func flagImageStyle() -> some View {
-		self.modifier(FlagImage())
-	}
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
 }
