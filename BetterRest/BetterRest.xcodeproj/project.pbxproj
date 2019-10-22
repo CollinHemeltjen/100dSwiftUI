@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E397EB81235F13160085C77A /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E397EB80235F13160085C77A /* SleepCalculator.mlmodel */; };
 		E3E36727235B6354005CFE38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E36726235B6354005CFE38 /* AppDelegate.swift */; };
 		E3E36729235B6354005CFE38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E36728235B6354005CFE38 /* SceneDelegate.swift */; };
 		E3E3672B235B6354005CFE38 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E3672A235B6354005CFE38 /* ContentView.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E397EB80235F13160085C77A /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = "<group>"; };
 		E3E36723235B6354005CFE38 /* BetterRest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterRest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E36726235B6354005CFE38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3E36728235B6354005CFE38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 			children = (
 				E3E36725235B6354005CFE38 /* BetterRest */,
 				E3E36724235B6354005CFE38 /* Products */,
+				E397EB80235F13160085C77A /* SleepCalculator.mlmodel */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3E36727235B6354005CFE38 /* AppDelegate.swift in Sources */,
+				E397EB81235F13160085C77A /* SleepCalculator.mlmodel in Sources */,
 				E3E36729235B6354005CFE38 /* SceneDelegate.swift in Sources */,
 				E3E3672B235B6354005CFE38 /* ContentView.swift in Sources */,
 			);
