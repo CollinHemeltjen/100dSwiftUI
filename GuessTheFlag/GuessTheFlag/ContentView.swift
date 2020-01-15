@@ -16,6 +16,8 @@ struct ContentView: View {
 	@State private var scoreTitle = ""
 
 	@State private var score = 0
+	@State private var animationAmount = [0.0, 0.0, 0.0]
+	@State private var isCorrect = [true, true, true]
 
     var body: some View {
 		ZStack{
@@ -40,8 +42,12 @@ struct ContentView: View {
 					}) {
 						FlagImage(image: self.countries[number])
 					}
+					.rotation3DEffect(.degrees(self.animationAmount[number]),
+									   axis: (x: 0, y: 1, z: 0))
+						.opacity(self.isCorrect[number] ? 1 : 0)
 				}
 				VStack{
+					Text(scoreTitle)
 					Text("Score:")
 					Text("\(self.score)")
 						.font(.title)
@@ -49,12 +55,6 @@ struct ContentView: View {
 				}.foregroundColor(.white)
 				Spacer()
 			}
-		}.alert(isPresented: $showingScore) {
-			Alert(title: Text(scoreTitle),
-				  message: Text("Your score is \(self.score)"),
-				  dismissButton: .default(Text("Continue")){
-					  self.askQuestion()
-				  })
 		}
     }
 
@@ -62,17 +62,28 @@ struct ContentView: View {
 		if number == correctAnswer {
 			scoreTitle = "Correct"
 			score += 1
+			withAnimation {
+				self.animationAmount[number] += 360
+
+				for i in 0..<isCorrect.count where i != number{
+					isCorrect[i] = false
+				}
+			}
 		} else {
 			scoreTitle = "Wrong, that is the flag of \(countries[number])"
 			score -= 1
 		}
 
-		showingScore = true
+		askQuestion()
 	}
 
 	func askQuestion(){
 		countries.shuffle()
 		correctAnswer = Int.random(in: 0...2 )
+		self.animationAmount = [0.0, 0.0, 0.0]
+		withAnimation{
+			self.isCorrect = [true, true, true]
+		}
 	}
 }
 
