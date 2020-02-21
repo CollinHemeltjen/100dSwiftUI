@@ -28,6 +28,7 @@ struct QuestionView: View {
 					.font(.largeTitle)
 					.fontWeight(.black)
 					.padding()
+					.transition(.move(edge: .bottom))
 				Text("\(answer)")
 					.font(.largeTitle)
 					.fontWeight(.black)

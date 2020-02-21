@@ -21,6 +21,7 @@ struct ContentView: View {
 				} else {
 					if viewModel.questions!.count > 0 {
 						QuestionContainer(viewModel: viewModel)
+//							.transition(.slide)
 					} else {
 						ReView(viewModel: viewModel)
 					}

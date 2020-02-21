@@ -9,20 +9,22 @@
 import SwiftUI
 
 struct TableSelector: View {
+	@State var tables = [Bool](repeating: false, count: 13)
+
     var body: some View {
 		VStack{
 			HStack{
-				ForEach(0...6, id: \.self){
-					Button("\($0)"){
-
-					}.buttonStyle(PillButtonStyle())
+				ForEach(0...6, id: \.self){ number in
+					Toggle(isOn: self.$tables[number]) {
+							Text("\(number)")
+						}.toggleStyle(MyToggleStyle())
 				}
 			}.padding(5)
 			HStack{
-				ForEach(7...12, id: \.self){
-					Button("\($0)"){
-
-					}.buttonStyle(PillButtonStyle())
+				ForEach(7...12, id: \.self){ number in
+					Toggle(isOn: self.$tables[number]) {
+						Text("\(number)")
+					}.toggleStyle(MyToggleStyle())
 				}
 			}.padding(5)
 		}
@@ -35,16 +37,24 @@ struct TableSelector_Previews: PreviewProvider {
     }
 }
 
-struct PillButtonStyle: ButtonStyle {
-	var selected = false
 
-    public func makeBody(configuration: PillButtonStyle.Configuration) -> some View {
+struct MyToggleStyle: ToggleStyle {
 
-        configuration.label
-			.multilineTextAlignment(.center)
-			.frame(width: 40, height: 30, alignment: .center)
-			.background(RoundedRectangle(cornerRadius: 5)
-				.fill(Color.black.opacity(0.1)))
-            .compositingGroup()
+    func makeBody(configuration: Self.Configuration) -> some View {
+        HStack {
+            configuration.label
+			if configuration.isOn {
+				Image(systemName: "checkmark")
+			}
+        }
+		.frame(width: 50, height: 30, alignment: .center)
+		.background(RoundedRectangle(cornerRadius: 5)
+		.fill(Color.black.opacity(0.1)))
+		.compositingGroup()
+		.onTapGesture {
+			  withAnimation {
+				  configuration.$isOn.wrappedValue.toggle()
+			  }
+		}
     }
 }

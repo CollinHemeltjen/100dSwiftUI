@@ -17,12 +17,14 @@ struct ReView: View {
 
 	var body: some View {
 		VStack{
-			Text("Je had \(viewModel.amountOfCorrectQuestions()) van de \(viewModel.finishedQuestions.count ?? 0) sommen goed.")
+			Text("Je had \(viewModel.amountOfCorrectQuestions()) van de \(viewModel.finishedQuestions.count ) sommen goed.")
 				.font(.largeTitle)
 				.fontWeight(.black)
 				.padding()
 			Button("Speel opnieuw"){
-				self.viewModel.questions = nil
+				withAnimation(){
+					self.viewModel.questions = nil
+				}
 			}.buttonStyle(ConfirmButtonStyle())
 
 		}

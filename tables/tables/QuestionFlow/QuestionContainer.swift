@@ -32,20 +32,24 @@ struct QuestionContainer: View {
     }
 
 	func checkAnswer(_ answer: Int){
-		self.answer = answer
-		self.viewModel.currentQuestion?.answer = answer
+		withAnimation(){
+			self.answer = answer
+			self.viewModel.currentQuestion?.answer = answer
+		}
 	}
 
 	func nextQuestion(){
-		viewModel.nextQuestion()
-		self.answer = nil
+		withAnimation(){
+			viewModel.nextQuestion()
+			self.answer = nil
+		}
 	}
 }
 
 struct QuestionContainer_Previews: PreviewProvider {
     static var previews: some View {
 		let viewModel = QuestionViewModel()
-		viewModel.startGame(with: 5)
+		viewModel.startGame(with: [5])
         return QuestionContainer(viewModel: viewModel)
     }
 }
