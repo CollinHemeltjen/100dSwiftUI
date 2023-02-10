@@ -23,7 +23,7 @@ struct NumPad: View {
 				ForEach((1...3).reversed(), id: \.self) { vIndex in
 					Group{
 						HStack{
-							ForEach((0...2), id: \.self) { hIndex in
+							ForEach((0...2).reversed(), id: \.self) { hIndex in
 								Group {
 									Button("\(vIndex * 3 - hIndex)"){
 										self.addNumber(vIndex * 3 - hIndex)
@@ -81,7 +81,8 @@ struct NumButtonStyle: ButtonStyle {
 			.font(Font.title.weight(.black))
 			.padding()
 			.padding()
-			.padding()
+			.padding(15)
+			.background(Color.black.opacity(0.0001))
             .compositingGroup()
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
     }

@@ -15,29 +15,32 @@ class QuestionViewModel: ObservableObject {
 
 	@Published var currentQuestion: Question?
 
-	func startGame(with tableOf: [Int], for amountOfQuestions: Int? = 24){
-		var tableOf = tableOf
+	func startGame(with tableOf: [Bool], for amountOfQuesttions: Int? = nil){
 		var questions = [Question]()
-		finishedQuestions = [Question]()
 
-		tableOf.removeAll(where: {$0 == -1})
-		for i in 0...12 {
-			for table in tableOf {
-				let question = Question(table, times: i)
-				questions.append(question)
+		for i in 0..<tableOf.count {
+			if tableOf[i] {
+				for table in 0...12 {
+					let question = Question(table, times: i)
+					questions.append(question)
+				}
 			}
 		}
-
-		for i in 0...12 {
-			for table in tableOf {
-				let question = Question(i, times: table)
-				questions.append(question)
+		// do it twice, once of 5x8 once for 8x5
+		for i in 0..<tableOf.count {
+			if tableOf[i] {
+				for table in 0...12 {
+					let question = Question(i, times: table)
+					questions.append(question)
+				}
 			}
 		}
 
 		questions.shuffle()
 
-		self.questions = questions.dropLast(questions.count - amountOfQuestions!)
+		if let amountOfQuestions = amountOfQuesttions { // only remove questions if a max is given
+			self.questions = questions.dropLast(questions.count - amountOfQuestions)
+		}
 		currentQuestion = questions[0]
 	}
 

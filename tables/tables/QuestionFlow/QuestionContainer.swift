@@ -49,7 +49,7 @@ struct QuestionContainer: View {
 struct QuestionContainer_Previews: PreviewProvider {
     static var previews: some View {
 		let viewModel = QuestionViewModel()
-		viewModel.startGame(with: [5])
+		viewModel.startGame(with: [false,false,false,false,false,true])
         return QuestionContainer(viewModel: viewModel)
     }
 }

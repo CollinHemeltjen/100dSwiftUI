@@ -21,7 +21,9 @@ struct QuestionView: View {
 
     var body: some View {
 		ZStack{
-			colors.randomElement()?.edgesIgnoringSafeArea(.all)
+			colors.randomElement()?
+				.edgesIgnoringSafeArea(.all)
+				.animation(.easeInOut)
 			VStack {
 				Spacer()
 				Text("\(currentQuestion.lhs) x \(currentQuestion.rhs) =")
